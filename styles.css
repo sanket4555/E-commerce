@@ -1,0 +1,58 @@
+/* Basic chatbox styling */
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+}
+
+.chat-window {
+    flex: 1;
+    overflow-y: auto;
+    background-color: #f1f1f1;
+    padding: 20px;
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.message.user {
+    align-self: flex-end;
+    background-color: #0084ff;
+    color: white;
+}
+
+.message.bot {
+    align-self: flex-start;
+    background-color: #e0e0e0;
+}
+
+.chat-form {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+#user-input {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    font-size: 16px;
+}
+
+.chat-form button {
+    padding: 15px 20px;
+    border: none;
+    background-color: #0084ff;
+    color: white;
+    cursor: pointer;
+}

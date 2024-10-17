@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Chatbot</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          /*  background: linear-gradient(45deg, #12c2e9, #c471ed, #f64f59); */
+            background-size: 400% 400%;
+           /* animation: gradientBG 15s ease infinite;*/
+        }
+      /*  @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }*/
+        .y
+        {
+            display: block;
+        }
+        .container {
+            align-items: center;
+           /* margin-left: 500px;*/
+            margin-top: 100px;
+            margin-bottom:200px;
+            width: 100%;
+           /* max-width: 600px;*/
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 3em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        button {
+            background: linear-gradient(45deg, #FF416C, #FF4B2B);
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            background: linear-gradient(45deg, #FF4B2B, #FF416C);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        li {
+          /*  background: linear-gradient(45deg, #FF416C, #FF4B2B);
+            color: #fff;*/
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+          /*  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
+        }
+    </style>
+     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='./img/icon1.png') }}">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="y">
+    <section id="header">
+        <a href="#"><img src="{{ url_for('static', filename='img/logo.png') }}" class="logo" alt=""></a>
+
+        <div>
+            <ul id="navbar">
+                <li><a  href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('shop') }}">Shop</a></li>
+                <li><a href="{{ url_for('blog') }}">Blog</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                <li><a class="active" href="{{ url_for('index') }}">chatbot</a></li>
+                <li id="lg-bag"><a href="{{ url_for('cart') }}"><i class='bx bx-shopping-bag' ></i></a></li>
+                <a href="#" id="close"><i class='bx bx-x'></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="{{ url_for('cart') }}"><i class='bx bx-shopping-bag' ></i></a>
+            <i id="bar" class='bx bx-menu'></i>
+        </div>
+    </section>
+    <section id="page-header" class="about-header">
+        <h2>#let's_talk</h2>
+        <p>LEAVE A MESSAGE, We love to hear from you!</p>
+    </section>
+
+    <div class="container">
+        <h1>Cara Chatbot</h1>
+        
+        <form method="POST">
+            <label for="input_text">Input:</label>
+            <input type="text" id="input_text" name="input_text" placeholder="Type your message here...">
+            <button type="submit">Ask the question</button>
+            
+            <label for="latest_answer">Latest Answer:</label>
+            <textarea id="latest_answer" name="latest_answer" readonly placeholder="The bot's answer will appear here...">{{ latest_answer }}</textarea>
+            
+        </form>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+    <section id="newsletter" class="section-p1 section-m1">
+        <div class="newstext">
+            <h4>Sign Up For Newsletters</h4>
+            <p>Get E-mail updates about our latest shop and <span>special offers.</span></p>
+        </div>
+        <div class="form">
+            <input type="text" placeholder="Your email address">
+            <button class="normal">Sign Up</button>
+        </div>
+    </section>
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="{{ url_for('static', filename='./img/logo.png') }}" alt="">
+            <h4>Contact</h4>
+            <p><strong>Address:</strong> 562 Wellington Road, Street 32, San Francisco</p>
+            <p><strong>Phone:</strong> +01 2222 345 / (+91) 0 123 456 789</p>
+            <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class='bx bxl-facebook'></i>
+                    <i class='bx bxl-twitter' ></i>
+                    <i class='bx bxl-instagram' ></i>
+                    <i class='bx bxl-pinterest-alt' ></i>
+                    <i class='bx bxl-youtube' ></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About us</a>
+            <a href="#">Devlivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="{{ url_for('static', filename='./img/pay/app.jpg') }}" alt="">
+                <img src="{{ url_for('static', filename='./img/pay/play.jpg') }}" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="{{ url_for('static', filename='./img/pay/pay.png') }}" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>© 2023, Sahad cmd - HTML CSS Ecommerce Template</p>
+        </div>
+    </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
